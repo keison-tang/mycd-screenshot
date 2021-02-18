@@ -1,0 +1,20 @@
+{
+    "manifest_version" : 2,
+    "name" : "test",
+    "version" : "0.001",
+    "content_scripts" : [
+        {
+            "matches" : ["*://onecard.onlineviewer.co.nz/*"],
+            "js" : ["content.js", "html2canvas.js"]
+        }
+    ],
+    "background" : {
+        "scripts" : ["background.js"]
+    },
+    "browser_action" : {
+        
+    },
+    "web_accessible_resources" : [
+        "images/*"
+    ]
+}
