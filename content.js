@@ -1,5 +1,16 @@
 chrome.runtime.onMessage.addListener(gotMessage);
 
+function getElementByXPath(xpath)
+{
+    return document.evaluate(
+        xpath
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
+}
+
 function gotMessage(message,sender,sendresponse)
 {
     console.log(message.txt);
@@ -22,7 +33,7 @@ function gotMessage(message,sender,sendresponse)
     let fuelImg = chrome.runtime.getURL("images/fuel.jpeg");
     let signatureImg = chrome.runtime.getURL("images/signature.png");
 
-    let testurl = "http://alphabet.eid.co.nz/StoreManagerSignatureImage.ashx?signature=Test";
+    //let testurl = "http://alphabet.eid.co.nz/StoreManagerSignatureImage.ashx?signature=Test";
 
     document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/image-personalisation.eid.co.nz\/FuelPointsBalance\/[a-zA-Z0-9]+/g, fuelImg);
     document.body.innerHTML = document.body.innerHTML.replace(/http:\/\/alphabet.eid.co.nz\/StoreManagerSignatureImage.ashx\?signature=.+fc=323232/g, signatureImg);
@@ -50,26 +61,16 @@ function gotMessage(message,sender,sendresponse)
     //     , null    
     // ).singleNodeValue;
 
-    let outro = document.evaluate(
-        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[3]"
-        , document
-        , null
-        , XPathResult.FIRST_ORDERED_NODE_TYPE
-        , null    
-    ).singleNodeValue;
+    let outroXPath = "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[3]";
+    let outro = getElementByXPath(outroXPath);
 
-    
+    // Hide outro
     if (outro != null) outro.style['display'] = "none";
 
-
-    let headerCell = document.evaluate(
-        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[1]/td"
-        , document
-        , null
-        , XPathResult.FIRST_ORDERED_NODE_TYPE
-        , null    
-    ).singleNodeValue;
+    let headerCellXPath = "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[1]/td";
+    let headerCell = getElementByXPath(headerCellXPath);
     
+    // Add styling back in that are not part of mainSection node
     headerCell.style['padding'] = '5px 0px 0px 0px';
     headerCell.style['background-color'] = "#125430";
 
