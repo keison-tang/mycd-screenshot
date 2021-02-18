@@ -34,21 +34,21 @@ function gotMessage(message,sender,sendresponse)
 
 
 
-    let header = document.evaluate(
-        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[position() < 3]"
-        , document
-        , null
-        , XPathResult.FIRST_ORDERED_NODE_TYPE
-        , null    
-    ).singleNodeValue;
+    // let header = document.evaluate(
+    //     "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[position() < 3]"
+    //     , document
+    //     , null
+    //     , XPathResult.FIRST_ORDERED_NODE_TYPE
+    //     , null    
+    // ).singleNodeValue;
 
-    let intro = document.evaluate(
-        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]"
-        , document
-        , null
-        , XPathResult.FIRST_ORDERED_NODE_TYPE
-        , null    
-    ).singleNodeValue;
+    // let intro = document.evaluate(
+    //     "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]"
+    //     , document
+    //     , null
+    //     , XPathResult.FIRST_ORDERED_NODE_TYPE
+    //     , null    
+    // ).singleNodeValue;
 
     let outro = document.evaluate(
         "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[3]"
@@ -59,7 +59,28 @@ function gotMessage(message,sender,sendresponse)
     ).singleNodeValue;
 
     
-    if (outro != null) outro.style.display = "none";
+    if (outro != null) outro.style['display'] = "none";
+
+
+    let headerCell = document.evaluate(
+        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[1]/td"
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
+    
+    headerCell.style['padding'] = '5px 0px 0px 0px';
+    headerCell.style['background-color'] = "#125430";
+
+
+    let mainSection = document.evaluate(
+        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody"
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
 
     //console.log(header);
     //console.log(intro);
@@ -70,11 +91,11 @@ function gotMessage(message,sender,sendresponse)
     //console.log(b);
 
 
-    html2canvas(header).then(function (canvas) {
-        document.body.appendChild(canvas);
-    });
+    // html2canvas(header).then(function (canvas) {
+    //     document.body.appendChild(canvas);
+    // });
     
-    html2canvas(intro, 
+    html2canvas(mainSection, 
         {
             allowTaing : true,
             useCORS : true
