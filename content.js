@@ -18,7 +18,57 @@ function gotMessage(message,sender,sendresponse)
     // Replace card numbers - numbers starting with 9480 or 9481
     document.body.innerHTML = document.body.innerHTML.replace(/948[0-1][0-9]+/g,'123456789');
 
+    // Replace cross origin images with web acessible resources
+    let fuelImg = chrome.runtime.getURL("images/fuel.jpeg");
+    let signatureImg = chrome.runtime.getURL("images/signature.png");
 
+    let testurl = "http://alphabet.eid.co.nz/StoreManagerSignatureImage.ashx?signature=Test";
+
+    document.body.innerHTML = document.body.innerHTML.replace(/https:\/\/image-personalisation.eid.co.nz\/FuelPointsBalance\/[a-zA-Z0-9]+/g, fuelImg);
+    document.body.innerHTML = document.body.innerHTML.replace(/http:\/\/alphabet.eid.co.nz\/StoreManagerSignatureImage.ashx\?signature=.+fc=323232/g, signatureImg);
+
+    //http://alphabet.eid.co.nz/StoreManagerSignatureImage.ashx?signature=Paul&bg=FFFFFF&fc=323232
+
+    //console.log(fuelImg);
+    //console.log(signatureImg);
+
+
+
+    let header = document.evaluate(
+        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[position() < 3]"
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
+
+    let intro = document.evaluate(
+        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[2]"
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
+
+    //console.log(header);
+    //console.log(intro);
+
+
+    //let b = el.getBoundingClientRect();
+    //console.log(b);
+
+
+    html2canvas(header).then(function (canvas) {
+        document.body.appendChild(canvas);
+    });
+    html2canvas(intro, 
+        {
+            allowTaing : true,
+            useCORS : true
+        }
+        ).then(function (canvas) {
+        document.body.appendChild(canvas);
+    });
 
 
 
