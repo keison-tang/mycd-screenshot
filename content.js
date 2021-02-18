@@ -50,8 +50,20 @@ function gotMessage(message,sender,sendresponse)
         , null    
     ).singleNodeValue;
 
+    let outro = document.evaluate(
+        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody/tr[3]"
+        , document
+        , null
+        , XPathResult.FIRST_ORDERED_NODE_TYPE
+        , null    
+    ).singleNodeValue;
+
+    
+    if (outro != null) outro.style.display = "none";
+
     //console.log(header);
     //console.log(intro);
+    //console.log(outro);
 
 
     //let b = el.getBoundingClientRect();
@@ -61,6 +73,7 @@ function gotMessage(message,sender,sendresponse)
     html2canvas(header).then(function (canvas) {
         document.body.appendChild(canvas);
     });
+    
     html2canvas(intro, 
         {
             allowTaing : true,
