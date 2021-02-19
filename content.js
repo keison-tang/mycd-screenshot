@@ -75,13 +75,8 @@ function gotMessage(message,sender,sendresponse)
     headerCell.style['background-color'] = "#125430";
 
 
-    let mainSection = document.evaluate(
-        "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody"
-        , document
-        , null
-        , XPathResult.FIRST_ORDERED_NODE_TYPE
-        , null    
-    ).singleNodeValue;
+    let mainSectionXPath = "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody";
+    let mainSection = getElementByXPath(mainSectionXPath);
 
     //console.log(header);
     //console.log(intro);
@@ -96,14 +91,27 @@ function gotMessage(message,sender,sendresponse)
     //     document.body.appendChild(canvas);
     // });
     
-    html2canvas(mainSection, 
+    html2canvas(mainSection,
         {
-            allowTaing : true,
-            useCORS : true
+            allowTaint: true,
+            useCORS: true
         }
-        ).then(function (canvas) {
+    ).then(function (canvas) {
         document.body.appendChild(canvas);
+
+
+        let dataURL = canvas.toDataURL();
+    
+        //console.log(dataURL);
+
+        
+        image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+        let link = document.createElement('a');
+        link.download = "my-image.png";
+        link.href = image;
+        link.click();
     });
+
 
 
 
