@@ -1,5 +1,6 @@
 chrome.runtime.onMessage.addListener(gotMessage);
 
+
 function getElementByXPath(xpath)
 {
     return document.evaluate(
@@ -9,6 +10,22 @@ function getElementByXPath(xpath)
         , XPathResult.FIRST_ORDERED_NODE_TYPE
         , null    
     ).singleNodeValue;
+}
+
+function generateImgFilename()
+{
+    let d = new Date();
+    let s = 'mycd_km_screenshot_';
+
+    s += d.getFullYear() 
+        + '‐' + d.getDate().toString().padStart(2, '0')
+        + '‐' + (d.getMonth() + 1).toString().padStart(2, '0') 
+        + '_'
+        + d.getHours().toString().padStart(2, '0')
+        + '‐' + d.getMinutes().toString().padStart(2, '0')
+        + '‐' + d.getSeconds().toString().padStart(2, '0');
+
+    return s;
 }
 
 function gotMessage(message,sender,sendresponse)
@@ -55,12 +72,12 @@ function gotMessage(message,sender,sendresponse)
                 scrollX: 0,
                 scrollY: -window.pageYOffset
             }
-        ).then(function (canvas) {
-            document.body.appendChild(canvas);
+        ).then(function(canvas) {
+            //document.body.appendChild(canvas);
 
             image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
             let link = document.createElement('a');
-            link.download = "my-image.png";
+            link.download = generateImgFilename() + '.png';
             link.href = image;
             link.click();
         });
@@ -68,4 +85,3 @@ function gotMessage(message,sender,sendresponse)
         alert("No message detected - ensure you have a myCountdown email open.");
     }
 }
-
