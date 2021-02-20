@@ -48,7 +48,10 @@ function gotMessage(message,sender,sendresponse)
     html2canvas(mainSection,
         {
             allowTaint: true,
-            useCORS: true
+            useCORS: true,
+
+            scrollX: 0,
+            scrollY: -window.pageYOffset
         }
     ).then(function(canvas) {
         document.body.appendChild(canvas);
