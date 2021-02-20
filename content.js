@@ -69,8 +69,10 @@ function gotMessage(message,sender,sendresponse)
                 allowTaint: true,
                 useCORS: true,
 
-                scrollX: 0,
-                scrollY: -window.pageYOffset
+                scrollX: -window.scrollX,
+                scrollY: -window.scrollY,
+                windowWidth: document.documentElement.offsetWidth,
+                windowHeight: document.documentElement.offsetHeight
             }
         ).then(function(canvas) {
             //document.body.appendChild(canvas);
