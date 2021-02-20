@@ -45,23 +45,27 @@ function gotMessage(message,sender,sendresponse)
     let mainSectionXPath = "/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td/table/tbody/tr/td/table/tbody";
     let mainSection = getElementByXPath(mainSectionXPath);
     
-    html2canvas(mainSection,
-        {
-            allowTaint: true,
-            useCORS: true,
+    if (mainSection)
+    {
+        html2canvas(mainSection,
+            {
+                allowTaint: true,
+                useCORS: true,
 
-            scrollX: 0,
-            scrollY: -window.pageYOffset
-        }
-    ).then(function(canvas) {
-        document.body.appendChild(canvas);
-        
-        image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
-        let link = document.createElement('a');
-        link.download = "my-image.png";
-        link.href = image;
-        link.click();
-    });
+                scrollX: 0,
+                scrollY: -window.pageYOffset
+            }
+        ).then(function (canvas) {
+            document.body.appendChild(canvas);
 
+            image = canvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+            let link = document.createElement('a');
+            link.download = "my-image.png";
+            link.href = image;
+            link.click();
+        });
+    } else {
+        alert("No message detected - ensure you have a myCountdown email open.");
+    }
 }
 
