@@ -5,7 +5,7 @@ chrome.browserAction.onClicked.addListener(IconClicked);
 function IconClicked(tab)
 {
     let msg = {
-        txt : "Hello"
+        txt : "Taking screenshot..."
     }
     chrome.tabs.sendMessage(tab.id,msg);
 }
