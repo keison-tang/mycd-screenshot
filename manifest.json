@@ -1,6 +1,7 @@
 {
     "manifest_version" : 2,
     "name" : "myCD KM Screenshot",
+    "description" : "Screenshot and save the KM for myCD emails - all in one click.",
     "version" : "1.0.0",
     "content_scripts" : [
         {
