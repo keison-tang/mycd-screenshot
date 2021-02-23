@@ -41,4 +41,14 @@ Up to date Google Chrome
 ## Notes
 - Ampersands (&) not working in regex for some reason
 - Chrome API's don't work in content scripts, put in background
-- Implement proxy is cross origin images required
+- Implement proxy if cross origin images required
+
+## Random
+If you make a comment on a commit in the online Github interface with links that auto-reference to a Github issue, it's permanently referenced, it persists even if you delete the comment. If repo is private, then only users who can see the repo can see the reference in the issues. If public, then everyone can see the references. Github support can't help to remove references. To remove the references, either ask the issue owner to remove the issue (unlikely) or "duplicate" the repo as follows with the exact history but without the references.
+
+1. Create a new empty repo in Github
+1. Navigate to source repo
+1. ```git push --mirror newRepoURL```
+1. Delete the old repo off Github / rename to something else
+1. Rename the new repo to the old repo
+1. Done - got the exact same repo but with no reference links to issues
